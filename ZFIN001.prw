@@ -1,11 +1,7 @@
 #include "totvs.ch"
 #include "protheus.ch"
 #include "TOPCONN.CH"
-/*/{Protheus.doc} ZFIN001
-	Importa um aquivo CSV e inclui os registros na SE2 titulos a receber
-	
-	autor: Flavio Marques
-/*/
+
 User Function ZFIN001() //funcao main
 	
 	Local cPerg := "ZFIN001"  //Grupo de perguntas da SX1
@@ -14,7 +10,7 @@ User Function ZFIN001() //funcao main
 	Local lPrimlin   := .T.
 	Local aCampos := {}		  //Array com o nome dos campos da tabela SE2
 	Local aDados  := {}		  //Valores dos campos impordados do aquivo CSV
-	Local i					  //Incremental usado no laÁo FOR
+	Local i					  //Incremental usado no la√ßo FOR
 	 
 	cDiret :=  cGetFile( 'Arquito CSV|*.csv| Arquivo TXT|*.txt| Arquivo XML|*.xml',; //[ cMascara], 
 							 'Selecao de Arquivos',;                  				 //[ cTitulo], 
@@ -42,7 +38,7 @@ User Function ZFIN001() //funcao main
 	EndDo
 	//Se o arquivo tiver dados, chama as perguntas complementares
 	//Num Titulo e Data de Vencimento
-	Pergunte(cPerg,.T.,"Inclus„o de Titulos Pag de Dividendos")
+	Pergunte(cPerg,.T.,"Inclus√£o de Titulos Pag de Dividendos")
 		
 		For i:=1 to Len(aDados)
 			IncProc("Importando Registros...")
@@ -75,13 +71,13 @@ User Function ZFIN001() //funcao main
 				MsUnlock()
 				
 			Else
-				MsgAlert("Titulo "+MV_PAR01+" Ja Existe, escolha outro numero.","Erro na Inclus„o")
+				MsgAlert("Titulo "+MV_PAR01+" Ja Existe, escolha outro numero.","Erro na Inclus√£o")
 				Return //Finaliza a rotina sem incluir titulos.
 		
 			EndIf
 			DbCloseArea() 
 		Next i
-	//Apresenta msg da inclus„o bem sucedida.
+	//Apresenta msg da inclus√£o bem sucedida.
 	MsgInfo("Importacao concluida com sucesso!"+chr(13)+;
 			  "Foram incluidos : "+cValToChar(len(aDados))+" Titulos";	
 			  ,"Sucesso!")
