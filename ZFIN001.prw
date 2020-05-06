@@ -1,16 +1,21 @@
 #include "totvs.ch"
 #include "protheus.ch"
 #include "TOPCONN.CH"
-
+/*/{Protheus.doc} ZFIN001
+	Importa um aquivo CSV e inclui os registros na SE2 titulos a receber
+	
+	autor: Flavio Marques
+/*/
 User Function ZFIN001() //funcao main
 	
-	Local cPerg := "ZFIN001"  //Grupo de perguntas da SX1
-	Local cDiret			  //Caminho e arquivo selecionado para processamento
-	Local cLinha  := ""		  //Incremental que guarda a linha do arquivo
+	Local cPerg := "ZFIN001"  	//Grupo de perguntas da SX1
+	Local cDiret			  	//Caminho e arquivo selecionado para processamento
+	Local cLinha  := ""		  	//Incremental que guarda a linha do arquivo
 	Local lPrimlin   := .T.
-	Local aCampos := {}		  //Array com o nome dos campos da tabela SE2
-	Local aDados  := {}		  //Valores dos campos impordados do aquivo CSV
-	Local i					  //Incremental usado no la√ßo FOR
+	Local aCampos := {}		  	//Array com o nome dos campos da tabela SE2
+	Local aDados  := {}		  	//Valores dos campos impordados do aquivo CSV
+	Local i					  	//Incremental usado no laÁo FOR
+	Local cCodEmp := FWCodEmp()	//Empresa logada
 	 
 	cDiret :=  cGetFile( 'Arquito CSV|*.csv| Arquivo TXT|*.txt| Arquivo XML|*.xml',; //[ cMascara], 
 							 'Selecao de Arquivos',;                  				 //[ cTitulo], 
@@ -19,6 +24,9 @@ User Function ZFIN001() //funcao main
 							 .F.,;                                    				 //[ lSalvar], 
 							 GETF_LOCALHARD  + GETF_NETWORKDRIVE,;    				 //[ nOpcoes], 
 							 .T.)         											 //[ Arvore do serv]
+	If (Len(cDiret)<= 1)
+		Return
+	EndIf 
 
 	FT_FUSE(cDiret)
 	ProcRegua(FT_FLASTREC())
@@ -38,16 +46,22 @@ User Function ZFIN001() //funcao main
 	EndDo
 	//Se o arquivo tiver dados, chama as perguntas complementares
 	//Num Titulo e Data de Vencimento
-	Pergunte(cPerg,.T.,"Inclus√£o de Titulos Pag de Dividendos")
-		
+	Pergunte(cPerg,.T.,"Inclus„o de Titulos Pag de Dividendos")
+	dbSelectArea('SE2')
+	dbSetOrder(1)
+	dbGoTop()
+	If (dbSeek(xFilial('SE2')+"SOC"+MV_PAR01)) //Verifica se ja tem o titulo com mesma chave na base
+		MsgAlert("Titulo "+MV_PAR01+" Ja Existe, escolha outro numero.","Erro na Inclus„o")
+		DbCloseArea()
+		return //Finaliza sem incluir titulos
+	EndIf
+	DbCloseArea()
 		For i:=1 to Len(aDados)
 			IncProc("Importando Registros...")
 			dbSelectArea('SE2')
 			dbSetOrder(1)
 			dbGoTop()
-			If (!dbSeek(xFilial('SE2')+"SOC"+MV_PAR01)) //Verifica se ja tem o titulo com mesma chave na base
-				
-				Reclock('SE2',.T.)
+			Reclock('SE2',.T.)
 					SE2->E2_PREFIXO := "SOC"
 					SE2->E2_NUM		:= MV_PAR01 //pergunta
 					SE2->E2_TIPO	:= "RC"
@@ -68,16 +82,12 @@ User Function ZFIN001() //funcao main
 					SE2->E2_BASECOF := Val(aDados[i,6])
 					SE2->E2_BASEPIS := Val(aDados[i,6])
 					SE2->E2_BASECSL := Val(aDados[i,6])
-				MsUnlock()
-				
-			Else
-				MsgAlert("Titulo "+MV_PAR01+" Ja Existe, escolha outro numero.","Erro na Inclus√£o")
-				Return //Finaliza a rotina sem incluir titulos.
-		
-			EndIf
+					SE2->E2_CCD     := aDados[i,3]
+					SE2->E2_DEBITO  := IIF(cCodEmp == '01',"22609000108","29502000009")	
+			MsUnlock()
 			DbCloseArea() 
 		Next i
-	//Apresenta msg da inclus√£o bem sucedida.
+	//Apresenta msg da inclus„o bem sucedida.
 	MsgInfo("Importacao concluida com sucesso!"+chr(13)+;
 			  "Foram incluidos : "+cValToChar(len(aDados))+" Titulos";	
 			  ,"Sucesso!")
