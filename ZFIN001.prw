@@ -6,7 +6,7 @@
 	
 	autor: Flavio Marques
 /*/
-User Function ZFIN001() //funcao main
+User Function ZFIN001() 
 	
 	Local cPerg := "ZFIN001"  	//Grupo de perguntas da SX1
 	Local cDiret			  	//Caminho e arquivo selecionado para processamento
