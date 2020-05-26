@@ -77,7 +77,7 @@ User Function ZFIN001()
 						SE2->E2_SALDO	:= Val(aDados[i,6])
 						SE2->E2_PORTADO := "341"
 						SE2->E2_HIST	:= "DIST LUCRO "+cValToChar(POSICIONE("SA2",1,XFILIAL("SA2")+aDados[i,1]+"01",'A2_NOME'))
-						SE2->E2_ORIGEM	:= "ZFIN001"
+						SE2->E2_ORIGEM	:= "FINA050"
 						SE2->E2_EMIS1	:= Date()
 						SE2->E2_VLCRUZ	:= Val(aDados[i,6])
 						SE2->E2_BASECOF := Val(aDados[i,6])
@@ -85,6 +85,7 @@ User Function ZFIN001()
 						SE2->E2_BASECSL := Val(aDados[i,6])
 						SE2->E2_CCD     := aDados[i,4]
 						SE2->E2_DEBITO  := IIF(cCodEmp == '01',"22609000108","29502000009")	
+						SE2->E2_MOEDA	:= "1"
 				MsUnlock()
 				DbCloseArea() 
 				nCont++
