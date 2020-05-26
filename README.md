@@ -10,4 +10,9 @@ Fonte desenvolvido para aprovar automaticamente as solicitações de marcação 
 
 # MVC - Help Desk
 Projeto de Help Desk que consta com seguintes rotinas </br>
-
+- cadastro de Setores
+- cadastro de Atendentes (Tecnicos)
+- cadastro de SLA (Criticidade em tempo de solução)
+- cadastro de Tipos de Chamados
+- Registro e listagem de Chamados (tickets)
+- Relação Tecnicos x Chamados
