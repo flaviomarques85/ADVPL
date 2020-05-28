@@ -23,6 +23,8 @@ Static Function ModelDef()
 Local oModel 
 Local oStruZZ5 := FWFormStruct(1,"ZZ5") 
 Local oStruZZ8 := FWFormStruct(1,"ZZ8") 
+
+	
 	 
 	oModel := MPFormModel():New("ZHELP05M")  
 	oModel:addFields('ZZ5MASTER', ,oStruZZ5)  

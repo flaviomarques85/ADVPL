@@ -3,7 +3,6 @@
 #include "TOPCONN.CH"
 /*/{Protheus.doc} ZFIN001
 	Importa um aquivo CSV e inclui os registros na SE2 titulos a receber
-	
 	autor: Flavio Marques
 /*/
 User Function ZFIN001() 
@@ -97,5 +96,5 @@ User Function ZFIN001()
 			  "Foram incluidos : "+cValtoChar(nCont)+" Titulos";	
 			  ,"Sucesso!")
 			  
-Return //finaliza funcao main
+Return 
 
