@@ -25,4 +25,4 @@ Exemplo basico de construção de um websevice em Advpl.
 - Faz a consulto via Method
 - Retorna a Descrição, UM e Status para o Client.
 <br>
-Necessario criar a classe Produto para usar a função FWJsonSerialize( )
+Necessario criar a classe Produtos para usar a função FWJsonSerialize( )
