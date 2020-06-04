@@ -18,15 +18,18 @@ Return
 
 Class Player
     Data Nome 
+    Data Pontos
 
     Method New() CONSTRUCTOR
     Method Resultado()  
-    
+    Method CalcPontos()
+    Method PrintPontos()
 EndClass
 
 
 Method New(cNome) Class Player
   ::Nome := cNome
+  ::Pontos := 10
 Return Self 
 
 Method Resultado(cNome) Class Player
@@ -38,3 +41,11 @@ Method Resultado(cNome) Class Player
     ENDIF
     Alert(cPlayer + cResult)
 Return 
+
+Method CalcPontos() Class  Player
+    
+Return
+
+Method PrintPontos(nPontos) Class Player
+    Alert("Seus Pontos são: "+nPontos)
+Return
