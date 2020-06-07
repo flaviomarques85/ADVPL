@@ -16,3 +16,19 @@ Projeto de Help Desk que consta com seguintes rotinas </br>
 - cadastro de Tipos de Chamados
 - Registro e listagem de Chamados (tickets)
 - Relação Tecnicos x Chamados
+
+</br></br>
+
+# WebService 
+Exemplo basico de construção de um websevice em Advpl.
+- Recebe o codigo de Produto via GET
+- Faz a consulto via Method
+- Retorna a Descrição, UM e Status para o Client.
+<br>
+Necessario criar a classe Produtos para usar a função FWJsonSerialize( )
+<br><br>
+
+<img src="https://centraldeatendimento.totvs.com/hc/article_attachments/360062756473/Screenshot_16.jpg" width="450" title="hover text">
+
+
+
