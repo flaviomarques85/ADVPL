@@ -3,7 +3,7 @@ import axios from 'axios';
 class Api{
 
     static async getCustomer(cod){
-        const response = await axios.get('http://localhost:8089/rest/CLIENTES?CGCCLI=',{cod});
+        const response = await axios.get(`http://localhost:8089/rest/CLIENTES?CGCCLI=${cod}`);
         console.log('response: ', response); 
     }
 }
