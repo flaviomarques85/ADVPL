@@ -1,7 +1,7 @@
 #include 'protheus.ch'
 
 User Function ZGAME01()
-Local oDlg, oGet1, oButton ,oSay1, oPlayer
+Local oDlg, oGet1, oButton1,oButton2 ,oSay1, oPlayer
 Local cNome := space(40) //<-Importante para permitir digitação no campo. 
  
  oDlg := MSDialog():New(0,0,300,500,'GAME01',,,,,CLR_BLACK,CLR_WHITE,,,.T.) // cria diálogo
@@ -11,7 +11,8 @@ Local cNome := space(40) //<-Importante para permitir digitação no campo.
     
     oPlayer := Player():New(cNome) //Criando o objeto Player
 
-    oButton:=tButton():New(50,40,'Jogar',oDlg,{||oPlayer:Resultado(cNome)},80,20,,,,.T.)
+    oButton1:=tButton():New(50,40,'Jogar',oDlg,{||oPlayer:Resultado(cNome)},80,20,,,,.T.)
+    oButton2:=tButton():New(80,40,'Ver Pontos',oDlg,{||oPlayer:PrintPontos(oPlayer:Pontos)},80,20,,,,.T.)
 
  oDlg:Activate(,,,.T.,,,,)
 Return  
@@ -38,14 +39,13 @@ Method Resultado(cNome) Class Player
     Local cResult := ", voce Perdeu."
     IF (nValor >= 52)
         cResult := ", voce Venceu!"
+        ::Pontos++
+        ELSE
+        ::Pontos--
     ENDIF
     Alert(cPlayer + cResult)
 Return 
 
-Method CalcPontos() Class  Player
-    
-Return
-
 Method PrintPontos(nPontos) Class Player
-    Alert("Seus Pontos são: "+nPontos)
+    Alert("Seus Pontos são: "+cValtoChar(nPontos)+" !")
 Return
