@@ -59,7 +59,7 @@ Static Function ModelDef()
     Local aGatSetor:= {} 
     Local aGatPrior:= {}
     Local aGatAtend:= {}
-    //FwStruTrigger transforma o gatilho tradicinal do Configurador em gatilho MVC
+    //FwStruTrigger transforma o gatilho tradicional do Configurador em gatilho MVC
 	aGatSetor := FwStruTrigger('ZZ8_SETOR', 'ZZ8_SETDES','ZZ9->ZZ9_DESC',	.T. ,'ZZ9',	1 ,'xFilial("ZZ9")+M->ZZ8_SETOR') 
 	aGatPrior := FwStruTrigger('ZZ8_CODPRI','ZZ8_DESPRI','ZZ6->ZZ6_DESC',	.T. ,'ZZ6',	1 ,'xFilial("ZZ6")+M->ZZ8_CODPRI') 
     aGatAtend := FwStruTrigger('ZZ8_TECNIC','ZZ8_TECDES','ZZ5->ZZ5_DESC',	.T. ,'ZZ5',	1 ,'xFilial("ZZ5")+M->ZZ8_TECNIC') 
