@@ -42,7 +42,7 @@ Static Function MenuDef()
 	ADD OPTION aRot TITLE 'Incluir'    ACTION 'VIEWDEF.ZTSBE02' OPERATION MODEL_OPERATION_INSERT ACCESS 0 //OPERATION 3
 	ADD OPTION aRot TITLE 'Alterar'    ACTION 'VIEWDEF.ZTSBE02' OPERATION MODEL_OPERATION_UPDATE ACCESS 0 //OPERATION 4
 	ADD OPTION aRot TITLE 'Excluir'    ACTION 'VIEWDEF.ZTSBE02' OPERATION MODEL_OPERATION_DELETE ACCESS 0 //OPERATION 5
-    ADD OPTION aRot TITLE 'Excluir'    ACTION 'U_zLegend'       OPERATION 6                      ACCESS 0 //OPERATION 6
+    ADD OPTION aRot TITLE 'Legenda'    ACTION 'U_zLegend'       OPERATION 6                      ACCESS 0 //OPERATION 6
 Return aRot
 
 /*---------------------------------------------------------------------*
@@ -124,6 +124,13 @@ Static Function ViewDef()
 	
 Return oView
 
+/****************************************
+Funcao para calcular e gravar as 
+parcelas do contrata, as mesmas são
+gradas em uma tabela separada, uma 
+estrutura parecida com o Pedido Venda
+Tabala de cabeçalho e Tabela de itens
+******************************************/
 Static Function ZTSBEGRV(oModel)
 
     Local oModelPad  := FWModelActive()
@@ -132,7 +139,7 @@ Static Function ZTSBEGRV(oModel)
     Local nValor     := oModelPad:GetValue('FORMZB1', 'ZB1_VALOR')
 	Local nOpc       := oModelPad:GetOperation()
 	Local lRet       := .T.
-    Local i := 0 //Variavel do For
+    Local i 		 := 0 //Variavel do For
 
     //Necessario o commit do form ZB1 devido as ontras operações de Delete e Alter.
     FWFormCommit( oModel ) 
